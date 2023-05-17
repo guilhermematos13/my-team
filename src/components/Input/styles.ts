@@ -18,6 +18,7 @@ export const Container = styled.div`
     box-shadow: none;
     border: 0;
     font-size: 16px;
+    border-radius: 8px;
 
     ::placeholder {
       ${(props) => props.theme['gray-400']}
