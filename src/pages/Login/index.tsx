@@ -1,4 +1,4 @@
-import { ArrowCircleRight, Keyhole } from '@phosphor-icons/react';
+import { Keyhole } from '@phosphor-icons/react';
 import { Input } from '../../components/Input';
 import { Container, LoginStyled, Title } from './styles';
 import { ButtonPrimary } from '../../components/ButtonPrimary';
@@ -13,7 +13,7 @@ export function Login() {
           placeholder="Insira a chave de autenticação"
         />
         <div>
-          <ButtonPrimary title="Entrar" icon={<ArrowCircleRight size={32} />} />
+          <ButtonPrimary type="submit" />
         </div>
       </LoginStyled>
     </Container>

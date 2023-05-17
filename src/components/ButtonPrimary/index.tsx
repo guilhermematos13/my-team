@@ -1,16 +1,14 @@
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import { ButtonStyled } from './styles';
+import { ArrowCircleRight } from '@phosphor-icons/react';
 
-interface ButtonProps {
-  title: string;
-  icon: ReactNode;
-}
+type ButtonPrimaryProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function ButtonPrimary({ title, icon }: ButtonProps) {
+export function ButtonPrimary({ ...props }: ButtonPrimaryProps) {
   return (
-    <ButtonStyled>
-      {title}
-      {icon}
+    <ButtonStyled {...props}>
+      Entrar
+      <ArrowCircleRight size={32} />
     </ButtonStyled>
   );
 }
