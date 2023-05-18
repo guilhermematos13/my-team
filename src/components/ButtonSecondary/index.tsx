@@ -1,20 +1,16 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import { ButtonStyled } from './styles';
+import { SoccerBall } from '@phosphor-icons/react';
 
 interface ButtonSecondaryProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: ReactNode;
   title: string;
 }
 
-export function ButtonSecondary({
-  icon,
-  title,
-  ...props
-}: ButtonSecondaryProps) {
+export function ButtonSecondary({ title, ...props }: ButtonSecondaryProps) {
   return (
     <ButtonStyled {...props}>
       {title}
-      {icon}
+      <SoccerBall size={32} />
     </ButtonStyled>
   );
 }
