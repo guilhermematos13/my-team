@@ -3,16 +3,17 @@ import { Container } from './styles';
 
 interface HeaderProps {
   team?: boolean;
+  teamTitle: string;
 }
 
-export function Header({ team }: HeaderProps) {
+export function Header({ team, teamTitle }: HeaderProps) {
   if (team) {
     return (
       <Container>
         <div className="withTeam">
           <img src="https://media-1.api-sports.io/football/teams/126.png" />
         </div>
-        <strong>Escolha seu time</strong>
+        <strong>{teamTitle}</strong>
         <button>
           Sair
           <SignOut />
