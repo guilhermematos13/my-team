@@ -1,5 +1,5 @@
 import { Modal } from '../../../components/Modal';
-import { Content, Header } from './styles';
+import { Content } from './styles';
 
 export function StatisticModal() {
   return (
