@@ -10,6 +10,7 @@ export function Login() {
         <Title>API Key</Title>
         <Input
           icon={<Keyhole size={32} />}
+          type="text"
           placeholder="Insira a chave de autenticação"
         />
         <div>
