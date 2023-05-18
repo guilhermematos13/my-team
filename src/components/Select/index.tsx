@@ -1,6 +1,6 @@
 import * as Select from '@radix-ui/react-select';
 import { Container, SelectTitle } from './styles';
-import { CaretDown } from '@phosphor-icons/react';
+import { CaretDown, Check } from '@phosphor-icons/react';
 import { forwardRef } from 'react';
 
 interface SelectFormProps {
@@ -8,10 +8,14 @@ interface SelectFormProps {
   title: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SelectItem = forwardRef(({ children, ...props }: any, forwardRef) => {
   return (
     <Select.Item {...props} ref={forwardRef}>
       <Select.ItemText>{children}</Select.ItemText>
+      <Select.ItemIndicator>
+        <Check size={20} />
+      </Select.ItemIndicator>
     </Select.Item>
   );
 });
@@ -30,18 +34,32 @@ export function SelectForm({ placeholder, title }: SelectFormProps) {
             <CaretDown size={32} />
           </Select.Icon>
         </Select.Trigger>
-        <Select.Content className="overflow-hidden bg-[#1E1E1E] p-4 text-base w-[590px] rounded-lg">
-          <Select.Group>
-            <SelectItem value="Brasil" className="p-4 text-[#DBDBDB]">
-              Brasil
-            </SelectItem>
-            <SelectItem value="Argentina" className="p-4 text-[#DBDBDB]">
-              Argentina
-            </SelectItem>
-            <SelectItem value="Inglaterra" className="p-4 text-[#DBDBDB]">
-              Inglaterra
-            </SelectItem>
-          </Select.Group>
+        <Select.Content
+          position="popper"
+          className="bg-[#1E1E1E] p-4 text-base w-[590px] max-h-[500px] -mt-1 rounded-b-lg"
+        >
+          <Select.Viewport className="p-1">
+            <Select.Group>
+              <SelectItem
+                value="Brasil"
+                className="flex justify-between p-4 text-[#DBDBDB]"
+              >
+                Brasil
+              </SelectItem>
+              <SelectItem
+                value="Argentina"
+                className="flex justify-between p-4 text-[#DBDBDB]"
+              >
+                Argentina
+              </SelectItem>
+              <SelectItem
+                value="Inglaterra"
+                className="flex justify-between p-4 text-[#DBDBDB]"
+              >
+                Inglaterra
+              </SelectItem>
+            </Select.Group>
+          </Select.Viewport>
         </Select.Content>
       </Select.Root>
     </Container>
