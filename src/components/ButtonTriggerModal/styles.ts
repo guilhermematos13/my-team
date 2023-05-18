@@ -9,6 +9,7 @@ export const ButtonStyled = styled.button`
   gap: 12px;
   border: 0;
   border-radius: 8px;
+  outline: none;
 
   background-color: ${(props) => props.theme['green-500']};
 
@@ -20,5 +21,9 @@ export const ButtonStyled = styled.button`
     background-color: ${(props) => props.theme['green-700']};
     transition-timing-function: ease-out;
     transition-duration: 300ms;
+  }
+
+  :focus {
+    border: 1px solid ${(props) => props.theme['gray-100']};
   }
 `;

@@ -1,4 +1,4 @@
-import { ButtonSecondary } from '../ButtonSecondary';
+import { ButtonTriggerModal } from '../ButtonTriggerModal';
 import { Container } from './styles';
 
 interface MenuBannerProps {
@@ -10,7 +10,7 @@ export function MenuBanner({ title, buttonTitle }: MenuBannerProps) {
   return (
     <Container>
       <h2>{title}</h2>
-      <ButtonSecondary title={buttonTitle} />
+      <ButtonTriggerModal title={buttonTitle} />
     </Container>
   );
 }
