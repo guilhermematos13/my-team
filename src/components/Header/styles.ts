@@ -34,4 +34,18 @@ export const Container = styled.div`
   div {
     width: 78px;
   }
+
+  .withTeam {
+    background-color: ${(props) => props.theme['gray-900']};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 4.5rem;
+
+    img {
+      height: 3.5rem;
+      width: 3.5rem;
+    }
+  }
 `;
