@@ -1,10 +1,25 @@
-import * as Dialog from '@radix-ui/react-dialog';
 import { Modal } from '../../../components/Modal';
+import { Content, Header } from './styles';
 
 export function LineUpsModal() {
   return (
-    <Modal title="Formacao">
-      <div>HAHAHHA</div>
+    <Modal title="Formações">
+      <Header>
+        <strong>Formação</strong>
+        <strong>Vezes utilizadas</strong>
+      </Header>
+      <Content>
+        <p>4.3.2.1</p>
+        <p>34</p>
+      </Content>
+      <Content>
+        <p>4.3.2.1</p>
+        <p>34</p>
+      </Content>
+      <Content>
+        <p>4.3.2.1</p>
+        <p>34</p>
+      </Content>
     </Modal>
   );
 }
