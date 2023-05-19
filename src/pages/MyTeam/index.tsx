@@ -1,8 +1,8 @@
 import { Header } from '../../components/Header';
 import { MenuBanner } from '../../components/MenuBanner';
-import { LineUpsModal } from '../../partials/MyTeam/LineUpsModal';
-import { PlayersModal } from '../../partials/MyTeam/PlayersModal';
-import { StatisticModal } from '../../partials/MyTeam/StatisticModal';
+import { LineUpsModal } from '../../partials/MyTeamPartials/LineUpsModal';
+import { PlayersModal } from '../../partials/MyTeamPartials/PlayersModal';
+import { StatisticModal } from '../../partials/MyTeamPartials/StatisticModal';
 import { Container, MenuContainer } from './styles';
 import * as Dialog from '@radix-ui/react-dialog';
 
