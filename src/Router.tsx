@@ -7,8 +7,8 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/team-select" element={<FormPage />} />
-      <Route path="/my-team" element={<MyTeam />} />
+      <Route path="/selecao-time" element={<FormPage />} />
+      <Route path="/meu-time" element={<MyTeam />} />
     </Routes>
   );
 }

@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import { ButtonPrimary } from '../../components/ButtonPrimary';
 import { Header } from '../../components/Header';
 import { SelectForm } from '../../components/Select';
 import { ButtonContainer, Container, FormContainer, Title } from './styles';
 
 export function FormPage() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Header />
@@ -15,7 +18,11 @@ export function FormPage() {
           <SelectForm title="Liga" placeholder="Selecione a Liga" />
           <SelectForm title="Time" placeholder="Selecione o Time" />
           <ButtonContainer>
-            <ButtonPrimary />
+            <ButtonPrimary
+              onClick={() => {
+                navigate('/meu-time');
+              }}
+            />
           </ButtonContainer>
         </FormContainer>
       </Container>
