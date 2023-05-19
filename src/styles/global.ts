@@ -12,4 +12,18 @@ export const GlobalStyle = createGlobalStyle`
 body {
     background-color: ${(props) => props.theme['gray-900']};
 };
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px ${(props) => props.theme['gray-100']};
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme['green-700']};
+}
 `;
