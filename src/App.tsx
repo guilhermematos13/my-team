@@ -3,13 +3,16 @@ import { GlobalStyle } from './styles/global';
 import { defaultTheme } from './styles/themes/default';
 import { BrowserRouter } from 'react-router-dom';
 import { Router } from './Router';
+import { MyTeamContextProvider } from './context/MyTeamContext';
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <GlobalStyle />
-        <Router />
+        <MyTeamContextProvider>
+          <GlobalStyle />
+          <Router />
+        </MyTeamContextProvider>
       </BrowserRouter>
     </ThemeProvider>
   );
