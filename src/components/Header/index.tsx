@@ -3,7 +3,7 @@ import { Container } from './styles';
 
 interface HeaderProps {
   team?: boolean;
-  teamTitle: string;
+  teamTitle?: string;
 }
 
 export function Header({ team, teamTitle }: HeaderProps) {
