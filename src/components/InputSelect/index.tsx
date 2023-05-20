@@ -16,12 +16,12 @@ export const InputSelect = forwardRef(
       <Container>
         <SelectTitle>{title}</SelectTitle>
         <div>
-          <Select placeholder={placeholder} {...props} {...ref}>
-            <option disabled selected value="">
+          <Select defaultValue="" placeholder={placeholder} {...props} {...ref}>
+            <option disabled value="">
               {placeholder}
             </option>
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
+            {options.map((option, index) => (
+              <option key={index} value={option.value}>
                 {option.label}
               </option>
             ))}

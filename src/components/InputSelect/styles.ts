@@ -41,6 +41,7 @@ export const Select = styled.select`
 
   :disabled {
     background-color: ${(props) => props.theme['gray-disabled']};
+    cursor: not-allowed;
   }
 `;
 
