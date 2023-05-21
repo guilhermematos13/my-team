@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { InputSelect } from '../../components/InputSelect';
 import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
+import { toast } from 'react-hot-toast';
+import { ErrorMessage } from '../../components/ErrorMessage';
 
 export function FormPage() {
   const [countriesList, setCountriesList] = useState<SelectData[]>([]);
@@ -13,7 +15,14 @@ export function FormPage() {
   const [leaguesList, setLeaguesList] = useState<SelectData[]>([]);
   const [teamsList, setTeamsList] = useState<SelectData[]>([]);
 
-  const { handleSubmit, register, watch, setValue, resetField } = useForm({
+  const {
+    handleSubmit,
+    register,
+    watch,
+    setValue,
+    resetField,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       country: '',
       season: '',
@@ -55,8 +64,8 @@ export function FormPage() {
           });
         setTeamsList(teams);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        toast.error('Algo deu errado ao buscar os times');
       });
   }
 
@@ -67,7 +76,7 @@ export function FormPage() {
         const leagues =
           response.data.api.leagues &&
           Object.entries(response.data.api.leagues as LeaguesData).map(
-            ([_, value]) => {
+            ([, value]) => {
               return {
                 value: value.league_id,
                 label: value.name,
@@ -76,8 +85,8 @@ export function FormPage() {
           );
         setLeaguesList(leagues);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        toast.error('Algo deu errado ao buscar as ligas');
       });
   }
 
@@ -92,8 +101,8 @@ export function FormPage() {
           });
         setSeasonsList(seasons);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        toast.error('Algo deu errado ao buscar as temporadas');
       });
   }
 
@@ -109,8 +118,8 @@ export function FormPage() {
 
         setCountriesList(countries);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        toast.error('Algo deu errado ao buscar os países');
       });
   }
 
@@ -126,7 +135,7 @@ export function FormPage() {
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
           <Title>Selecione as opções abaixo:</Title>
           <InputSelect
-            {...register('country', { required: true })}
+            {...register('country', { required: 'Campo obrigatório' })}
             value={watch('country')}
             placeholder="Selecione um país"
             title="País"
@@ -136,8 +145,11 @@ export function FormPage() {
               handleClearFields(['league', 'season', 'team']);
             }}
           />
+          {errors.country && watch('country') === '' && (
+            <ErrorMessage>{errors.country.message}</ErrorMessage>
+          )}
           <InputSelect
-            {...register('season', { required: true })}
+            {...register('season', { required: 'Campo obrigatório' })}
             value={watch('season')}
             title="Temporada"
             disabled={isDisabledSeason}
@@ -149,8 +161,11 @@ export function FormPage() {
               handleClearFields(['league', 'team']);
             }}
           />
+          {errors.season && watch('season') === '' && (
+            <ErrorMessage>{errors.season.message}</ErrorMessage>
+          )}
           <InputSelect
-            {...register('league', { required: true })}
+            {...register('league', { required: 'Campo obrigatório' })}
             value={watch('league')}
             title="Ligas"
             disabled={isDisabledLeague}
@@ -162,8 +177,11 @@ export function FormPage() {
               handleClearFields(['team']);
             }}
           />
+          {errors.league && watch('league') === '' && (
+            <ErrorMessage>{errors.league.message}</ErrorMessage>
+          )}
           <InputSelect
-            {...register('team', { required: true })}
+            {...register('team', { required: 'Campo obrigatório' })}
             value={watch('team')}
             title="Time"
             disabled={isDisabledTeam}
@@ -173,6 +191,9 @@ export function FormPage() {
               setValue('team', event.target.value);
             }}
           />
+          {errors.team && watch('team') === '' && (
+            <ErrorMessage>{errors.team.message}</ErrorMessage>
+          )}
 
           <ButtonContainer>
             <ButtonPrimary title="Continuar" type="submit" />
