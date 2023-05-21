@@ -9,7 +9,7 @@ export const Header = styled.div`
   background-color: ${(props) => props.theme['gray-900']};
 
   strong {
-    font-size: 24px;
+    font-size: 1.5rem;
     color: ${(props) => props.theme['gray-100']};
   }
 `;
@@ -25,7 +25,7 @@ export const PlayerInfo = styled.div`
   background-color: ${(props) => props.theme['gray-900']};
 
   p {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: ${(props) => props.theme['gray-100']};
   }
 `;

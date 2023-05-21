@@ -10,7 +10,7 @@ export const Header = styled.div`
   background-color: ${(props) => props.theme['gray-900']};
 
   strong {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: ${(props) => props.theme['gray-100']};
   }
 `;
@@ -24,7 +24,7 @@ export const Content = styled.div`
   align-items: center;
 
   p {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: ${(props) => props.theme['gray-100']};
   }
 `;

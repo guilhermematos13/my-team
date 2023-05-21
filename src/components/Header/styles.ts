@@ -8,6 +8,10 @@ export const Container = styled.div`
   align-items: center;
   padding: 3px 44px;
 
+  @media screen and (max-width: 425px) {
+    padding: 3px 12px;
+  }
+
   background-color: ${(props) => props.theme['green-500']};
 
   button {
@@ -17,18 +21,26 @@ export const Container = styled.div`
     color: ${(props) => props.theme['gray-100']};
     background-color: transparent;
     border: 1px solid transparent;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
 
     :hover {
       border-bottom: 1px solid ${(props) => props.theme['gray-100']};
     }
+
+    @media screen and (max-width: 425px) {
+      font-size: 1rem;
+    }
   }
 
   strong {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
     color: ${(props) => props.theme['gray-100']};
+
+    @media screen and (max-width: 425px) {
+      font-size: 1rem;
+    }
   }
 
   div {
@@ -46,6 +58,14 @@ export const Container = styled.div`
     img {
       height: 3.5rem;
       width: 3.5rem;
+    }
+  }
+
+  .withoutTeam {
+    width: 80px;
+
+    @media screen and (max-width: 425px) {
+      width: 56px;
     }
   }
 `;

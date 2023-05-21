@@ -19,7 +19,7 @@ export const FormContainer = styled.form`
 `;
 
 export const Title = styled.p`
-  font-size: 24px;
+  font-size: 1.5rem;
   color: ${(props) => props.theme['gray-100']};
   margin-bottom: 52px;
 `;

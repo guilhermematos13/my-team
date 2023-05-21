@@ -10,7 +10,7 @@ export const Container = styled.div`
 `;
 
 export const SelectTitle = styled.label`
-  font-size: 20px;
+  font-size: 1.25rem;
   color: ${(props) => props.theme['gray-100']};
 `;
 

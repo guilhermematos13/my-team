@@ -12,7 +12,7 @@ export const ButtonStyled = styled.button`
 
   background-color: ${(props) => props.theme['gray-900']};
 
-  font-size: 16px;
+  font-size: 1rem;
   color: ${(props) => props.theme['gray-100']};
   cursor: pointer;
 

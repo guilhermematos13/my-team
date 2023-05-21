@@ -129,7 +129,7 @@ export function FormPage() {
 
   return (
     <div>
-      <Header />
+      <Header teamTitle="Escolha seu time" />
       <Container>
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
           <Title>Selecione as opções abaixo:</Title>

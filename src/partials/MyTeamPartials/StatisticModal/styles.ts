@@ -9,12 +9,12 @@ export const Content = styled.div`
   align-items: center;
 
   p {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: ${(props) => props.theme['gray-100']};
   }
 
   strong {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: ${(props) => props.theme['gray-100']};
     font-weight: bold;
   }

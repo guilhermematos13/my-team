@@ -13,7 +13,7 @@ export const Container = styled.div`
 
   h2 {
     color: ${(props) => props.theme['gray-100']};
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
   }
 `;

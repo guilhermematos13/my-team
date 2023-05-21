@@ -17,7 +17,7 @@ export const Container = styled.div`
     background-color: transparent;
     box-shadow: none;
     border: 0;
-    font-size: 16px;
+    font-size: 1rem;
     border-radius: 8px;
 
     ::placeholder {
