@@ -4,14 +4,15 @@ import { Container } from './styles';
 interface HeaderProps {
   team?: boolean;
   teamTitle: string;
+  logo: string;
 }
 
-export function Header({ team, teamTitle }: HeaderProps) {
+export function Header({ team, teamTitle, logo }: HeaderProps) {
   return (
     <Container>
       {team ? (
         <div className="withTeam">
-          <img src="https://media-1.api-sports.io/football/teams/126.png" />
+          <img src={logo} />
         </div>
       ) : (
         <div className="withoutTeam" />

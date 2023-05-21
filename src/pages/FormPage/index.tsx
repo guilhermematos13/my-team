@@ -4,12 +4,14 @@ import { Header } from '../../components/Header';
 import { ButtonContainer, Container, FormContainer, Title } from './styles';
 import { useForm } from 'react-hook-form';
 import { InputSelect } from '../../components/InputSelect';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { toast } from 'react-hot-toast';
 import { ErrorMessage } from '../../components/ErrorMessage';
+import { MyTeamContext } from '../../context/MyTeamContext';
 
 export function FormPage() {
+  const { setInfo } = useContext(MyTeamContext);
   const [countriesList, setCountriesList] = useState<SelectData[]>([]);
   const [seasonsList, setSeasonsList] = useState<SelectData[]>([]);
   const [leaguesList, setLeaguesList] = useState<SelectData[]>([]);
@@ -46,7 +48,8 @@ export function FormPage() {
     watch('country') === '' || watch('season') === '' || watch('league') === '';
 
   const onSubmit = (data: FormDataInterface) => {
-    navigate('/meu-time', { state: data });
+    setInfo(data);
+    navigate('/meu-time');
   };
 
   function FetchTeams(leagueId: string) {

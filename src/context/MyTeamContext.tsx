@@ -1,22 +1,28 @@
-import { ReactNode, createContext } from 'react';
+import { ReactNode, createContext, useState } from 'react';
 
 interface MyTeamContextType {
-  Context: () => void;
+  info: InfoData | undefined;
+  setInfo: React.Dispatch<React.SetStateAction<InfoData | undefined>>;
 }
 
 interface MyTeamProviderProps {
   children: ReactNode;
 }
 
+interface InfoData {
+  country: string;
+  season: string;
+  league: string;
+  team: string;
+}
+
 export const MyTeamContext = createContext({} as MyTeamContextType);
 
 export function MyTeamContextProvider({ children }: MyTeamProviderProps) {
-  const Context = () => {
-    return;
-  };
+  const [info, setInfo] = useState<InfoData>();
 
   return (
-    <MyTeamContext.Provider value={{ Context }}>
+    <MyTeamContext.Provider value={{ setInfo, info }}>
       {children}
     </MyTeamContext.Provider>
   );
