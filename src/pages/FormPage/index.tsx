@@ -46,8 +46,7 @@ export function FormPage() {
     watch('country') === '' || watch('season') === '' || watch('league') === '';
 
   const onSubmit = (data: FormDataInterface) => {
-    console.log(data);
-    //navigate('/meu-time');
+    navigate('/meu-time', { state: data });
   };
 
   function FetchTeams(leagueId: string) {
