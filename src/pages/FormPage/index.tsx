@@ -8,10 +8,12 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 
 export function FormPage() {
-  const [countryList, setCountryList] = useState<SelectData[]>();
-  const [seasonsList, setSeasonsList] = useState<SelectData[]>();
+  const [countriesList, setCountriesList] = useState<SelectData[]>([]);
+  const [seasonsList, setSeasonsList] = useState<SelectData[]>([]);
+  const [leaguesList, setLeaguesList] = useState<SelectData[]>([]);
+  const [teamsList, setTeamsList] = useState<SelectData[]>([]);
 
-  const { handleSubmit, register, watch, setValue } = useForm({
+  const { handleSubmit, register, watch, setValue, resetField } = useForm({
     defaultValues: {
       country: '',
       season: '',
@@ -20,6 +22,14 @@ export function FormPage() {
     },
   });
   const navigate = useNavigate();
+
+  function handleClearFields(
+    values: ('country' | 'team' | 'league' | 'season')[]
+  ) {
+    values.map((value) => {
+      resetField(value);
+    });
+  }
 
   const isDisabledSeason = watch('country') === '' || watch('country') === '';
   const isDisabledLeague = watch('country') === '' || watch('season') === '';
@@ -31,20 +41,45 @@ export function FormPage() {
     //navigate('/meu-time');
   };
 
-  const options = [
-    {
-      value: 'Brazil',
-      label: 'Brazil',
-    },
-    {
-      value: 'Argentina',
-      label: 'Argentina',
-    },
-    {
-      value: 'England',
-      label: 'England',
-    },
-  ];
+  function FetchTeams(leagueId: string) {
+    api
+      .get(`teams/league/${leagueId}`)
+      .then((response) => {
+        const teams =
+          response.data.api.teams &&
+          response.data.api.teams.map((data: TeamsData) => {
+            return {
+              value: data.team_id,
+              label: data.name,
+            };
+          });
+        setTeamsList(teams);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function FetchLeagues(countryName: string, season: string) {
+    api
+      .get(`leagues/country/${countryName}/${season}`)
+      .then((response) => {
+        const leagues =
+          response.data.api.leagues &&
+          Object.entries(response.data.api.leagues as LeaguesData).map(
+            ([_, value]) => {
+              return {
+                value: value.league_id,
+                label: value.name,
+              };
+            }
+          );
+        setLeaguesList(leagues);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   function FetchSeasons() {
     api
@@ -53,7 +88,7 @@ export function FormPage() {
         const seasons =
           response.data.api.seasons &&
           Object.entries(response.data.api.seasons).map((season) => {
-            return { value: season[0], label: season[1] };
+            return { value: season[1], label: season[1] };
           });
         setSeasonsList(seasons);
       })
@@ -64,14 +99,15 @@ export function FormPage() {
 
   function FetchCountries() {
     api
-      .get('v3/countries')
+      .get('countries')
       .then((response) => {
         const countries =
-          response.data.response &&
-          response.data.response.map((country: CountriesData) => {
-            return { value: country.name, label: country.name };
+          response.data.api.countries &&
+          Object.entries(response.data.api.countries).map((country) => {
+            return { value: country[1], label: country[1] };
           });
-        setCountryList(countries);
+
+        setCountriesList(countries);
       })
       .catch((error) => {
         console.log(error);
@@ -90,47 +126,56 @@ export function FormPage() {
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
           <Title>Selecione as opções abaixo:</Title>
           <InputSelect
-            {...register('country')}
+            {...register('country', { required: true })}
+            value={watch('country')}
             placeholder="Selecione um país"
             title="País"
-            options={countryList || []}
+            options={countriesList}
             onChange={(event) => {
               setValue('country', event.target.value);
+              handleClearFields(['league', 'season', 'team']);
             }}
           />
           <InputSelect
+            {...register('season', { required: true })}
+            value={watch('season')}
             title="Temporada"
             disabled={isDisabledSeason}
             placeholder="Selecione uma temporada"
-            options={seasonsList || []}
-            {...register('season')}
+            options={seasonsList}
             onChange={(event) => {
               setValue('season', event.target.value);
+              FetchLeagues(watch('country'), event.target.value);
+              handleClearFields(['league', 'team']);
             }}
           />
           <InputSelect
+            {...register('league', { required: true })}
+            value={watch('league')}
             title="Ligas"
             disabled={isDisabledLeague}
             placeholder="Selecione uma liga"
-            options={options}
-            {...register('league')}
+            options={leaguesList}
             onChange={(event) => {
               setValue('league', event.target.value);
+              FetchTeams(event.target.value);
+              handleClearFields(['team']);
             }}
           />
           <InputSelect
+            {...register('team', { required: true })}
+            value={watch('team')}
             title="Time"
             disabled={isDisabledTeam}
             placeholder="Selecione um time"
-            options={options}
-            {...register('team')}
+            options={teamsList}
             onChange={(event) => {
               setValue('team', event.target.value);
             }}
           />
 
           <ButtonContainer>
-            <ButtonPrimary type="submit" />
+            <ButtonPrimary title="Continuar" type="submit" />
           </ButtonContainer>
         </FormContainer>
       </Container>

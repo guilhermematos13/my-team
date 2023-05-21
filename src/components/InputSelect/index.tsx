@@ -16,7 +16,7 @@ export const InputSelect = forwardRef(
       <Container>
         <SelectTitle>{title}</SelectTitle>
         <div>
-          <Select defaultValue="" placeholder={placeholder} {...props} {...ref}>
+          <Select placeholder={placeholder} {...props} {...ref}>
             <option disabled value="">
               {placeholder}
             </option>

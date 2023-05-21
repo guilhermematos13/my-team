@@ -14,11 +14,12 @@ export function Login() {
         <Input
           icon={<Keyhole size={32} />}
           type="text"
-          placeholder="Insira a chave de autenticação"
+          placeholder="Insira sua chave de autenticação"
         />
         <div>
           <ButtonPrimary
             type="submit"
+            title="Entrar"
             onClick={() => {
               navigate('/selecao-time');
             }}
