@@ -16,6 +16,10 @@ export function FormPage() {
   const [seasonsList, setSeasonsList] = useState<SelectData[]>([]);
   const [leaguesList, setLeaguesList] = useState<SelectData[]>([]);
   const [teamsList, setTeamsList] = useState<SelectData[]>([]);
+  const [countryLoading, setCountryLoading] = useState(false);
+  const [seasonLoading, setSeasonLoading] = useState(false);
+  const [leagueLoading, setLeagueLoading] = useState(false);
+  const [teamLoading, setTeamLoading] = useState(false);
 
   const {
     handleSubmit,
@@ -53,6 +57,7 @@ export function FormPage() {
   };
 
   function FetchTeams(leagueId: string, seasonId: string) {
+    setTeamLoading(true);
     api
       .get(`v3/teams`, {
         params: {
@@ -73,10 +78,14 @@ export function FormPage() {
       })
       .catch(() => {
         toast.error('Algo deu errado ao buscar os times');
+      })
+      .finally(() => {
+        setTeamLoading(false);
       });
   }
 
   function FetchLeagues(countryName: string) {
+    setLeagueLoading(true);
     api
       .get(`v3/leagues`, {
         params: {
@@ -96,10 +105,14 @@ export function FormPage() {
       })
       .catch(() => {
         toast.error('Algo deu errado ao buscar as ligas');
+      })
+      .finally(() => {
+        setLeagueLoading(false);
       });
   }
 
   function FetchSeasons() {
+    setSeasonLoading(true);
     api
       .get('seasons')
       .then((response) => {
@@ -112,10 +125,14 @@ export function FormPage() {
       })
       .catch(() => {
         toast.error('Algo deu errado ao buscar as temporadas');
+      })
+      .finally(() => {
+        setSeasonLoading(false);
       });
   }
 
   function FetchCountries() {
+    setCountryLoading(true);
     api
       .get('countries')
       .then((response) => {
@@ -129,6 +146,9 @@ export function FormPage() {
       })
       .catch(() => {
         toast.error('Algo deu errado ao buscar os países');
+      })
+      .finally(() => {
+        setCountryLoading(false);
       });
   }
 
@@ -147,6 +167,7 @@ export function FormPage() {
             {...register('country', { required: 'Campo obrigatório' })}
             value={watch('country')}
             placeholder="Selecione um país"
+            loading={countryLoading}
             title="País"
             options={countriesList}
             onChange={(event) => {
@@ -161,6 +182,7 @@ export function FormPage() {
             {...register('season', { required: 'Campo obrigatório' })}
             value={watch('season')}
             title="Temporada"
+            loading={seasonLoading}
             disabled={isDisabledSeason}
             placeholder="Selecione uma temporada"
             options={seasonsList}
@@ -177,6 +199,7 @@ export function FormPage() {
             {...register('league', { required: 'Campo obrigatório' })}
             value={watch('league')}
             title="Ligas"
+            loading={leagueLoading}
             disabled={isDisabledLeague}
             placeholder="Selecione uma liga"
             options={leaguesList}
@@ -194,6 +217,7 @@ export function FormPage() {
             {...register('team', { required: 'Campo obrigatório' })}
             value={watch('team')}
             title="Time"
+            loading={teamLoading}
             disabled={isDisabledTeam}
             placeholder="Selecione um time"
             options={teamsList}

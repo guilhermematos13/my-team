@@ -5,31 +5,38 @@ interface SelectFormProps extends SelectHTMLAttributes<HTMLSelectElement> {
   title: string;
   placeholder: string;
   options: { value: string; label: string }[];
+  loading?: boolean;
 }
 
 export const InputSelect = forwardRef(
   (
-    { title, options, placeholder, ...props }: SelectFormProps,
+    { title, options, placeholder, loading, ...props }: SelectFormProps,
     ref: ForwardedRef<never>
   ) => {
     return (
       <Container>
         <SelectTitle>{title}</SelectTitle>
-        <div>
-          <Select placeholder={placeholder} {...props} {...ref}>
-            <option disabled value="">
-              {placeholder}
-            </option>
-            {options.map((option, index) => (
-              <option key={index} value={option.value}>
-                {option.label}
-              </option>
-            ))}
+        {loading ? (
+          <Select disabled>
+            <option>Carregando...</option>
           </Select>
-          <IconWrapper>
-            <CaretDown size={32} />
-          </IconWrapper>
-        </div>
+        ) : (
+          <div>
+            <Select placeholder={placeholder} {...props} {...ref}>
+              <option disabled value="">
+                {placeholder}
+              </option>
+              {options.map((option, index) => (
+                <option key={index} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </Select>
+            <IconWrapper>
+              <CaretDown size={32} />
+            </IconWrapper>
+          </div>
+        )}
       </Container>
     );
   }
