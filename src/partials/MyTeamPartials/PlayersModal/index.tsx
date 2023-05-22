@@ -5,15 +5,6 @@ import { MyTeamContext } from '../../../context/MyTeamContext';
 import { api } from '../../../services/api';
 import { toast } from 'react-hot-toast';
 
-interface PlayersData {
-  player: {
-    id: number;
-    name: string;
-    age: number;
-    nationality: string;
-  };
-}
-
 export function PlayersModal() {
   const [playersList, setPlayersList] = useState<PlayersData[]>([]);
   const { info } = useContext(MyTeamContext);

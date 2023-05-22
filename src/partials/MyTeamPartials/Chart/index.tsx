@@ -6,20 +6,6 @@ import { ChartContainer } from './styles';
 import { toast } from 'react-hot-toast';
 import { Loading } from '../../../components/Loading';
 
-interface GoalsData {
-  x: string;
-  label: string;
-  y: number;
-}
-
-type GoalsDataResponse = {
-  [key: string]: {
-    title: string;
-    percentage: string;
-    total: string;
-  };
-};
-
 export function Chart() {
   const [loading, setLoading] = useState<boolean>(true);
   const [goalsList, setGoalsList] = useState<GoalsData[]>([]);

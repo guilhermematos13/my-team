@@ -5,27 +5,6 @@ import { MyTeamContext } from '../../../context/MyTeamContext';
 import { api } from '../../../services/api';
 import { toast } from 'react-hot-toast';
 
-interface StatisticData {
-  played: number | undefined;
-  draws: number | undefined;
-  wins: number | undefined;
-  loses: number | undefined;
-}
-interface StatisticDataResponse {
-  played: {
-    total: number;
-  };
-  draws: {
-    total: number;
-  };
-  wins: {
-    total: number;
-  };
-  loses: {
-    total: number;
-  };
-}
-
 export function StatisticModal() {
   const [getStatistic, setGetStatistic] = useState<StatisticData>();
   const { info } = useContext(MyTeamContext);
@@ -59,7 +38,7 @@ export function StatisticModal() {
   }, [info?.season, info?.team, info?.league]);
 
   return (
-    <Modal title="Estatisticas">
+    <Modal title="Estatísticas">
       <Content>
         <strong>Total de jogos</strong>
         <p>{getStatistic?.played}</p>

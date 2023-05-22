@@ -5,11 +5,6 @@ import { Content, Header } from './styles';
 import { api } from '../../../services/api';
 import { toast } from 'react-hot-toast';
 
-interface lineUpsData {
-  formation: string;
-  played: number;
-}
-
 export function LineUpsModal() {
   const [lineUpList, setLineUpList] = useState([]);
   const { info } = useContext(MyTeamContext);
@@ -42,7 +37,7 @@ export function LineUpsModal() {
       </Header>
 
       {lineUpList &&
-        lineUpList.map((data: lineUpsData) => {
+        lineUpList.map((data: LineUpsData) => {
           return (
             <Content key={data.formation}>
               <p>{data.formation}</p>

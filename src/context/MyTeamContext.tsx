@@ -1,20 +1,5 @@
-import { ReactNode, createContext, useState } from 'react';
-
-interface MyTeamContextType {
-  info: InfoData | undefined;
-  setInfo: React.Dispatch<React.SetStateAction<InfoData | undefined>>;
-}
-
-interface MyTeamProviderProps {
-  children: ReactNode;
-}
-
-interface InfoData {
-  country: string;
-  season: string;
-  league: string;
-  team: string;
-}
+import { createContext, useState } from 'react';
+import { InfoData, MyTeamContextType, MyTeamProviderProps } from './interface';
 
 export const MyTeamContext = createContext({} as MyTeamContextType);
 
