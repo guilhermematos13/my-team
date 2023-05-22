@@ -9,7 +9,6 @@ import { api } from '../../services/api';
 import { toast } from 'react-hot-toast';
 import { ErrorMessage } from '../../components/ErrorMessage';
 import { MyTeamContext } from '../../context/MyTeamContext';
-import { Loading } from '../../components/Loading';
 
 export function FormPage() {
   const { setInfo } = useContext(MyTeamContext);
@@ -17,7 +16,6 @@ export function FormPage() {
   const [seasonsList, setSeasonsList] = useState<SelectData[]>([]);
   const [leaguesList, setLeaguesList] = useState<SelectData[]>([]);
   const [teamsList, setTeamsList] = useState<SelectData[]>([]);
-  const [loading, setLoading] = useState(true);
 
   const {
     handleSubmit,
@@ -54,16 +52,21 @@ export function FormPage() {
     navigate('/meu-time');
   };
 
-  function FetchTeams(leagueId: string) {
+  function FetchTeams(leagueId: string, seasonId: string) {
     api
-      .get(`teams/league/${leagueId}`)
+      .get(`v3/teams`, {
+        params: {
+          league: leagueId,
+          season: seasonId,
+        },
+      })
       .then((response) => {
         const teams =
-          response.data.api.teams &&
-          response.data.api.teams.map((data: TeamsData) => {
+          response.data.response &&
+          response.data.response.map((data: any) => {
             return {
-              value: data.team_id,
-              label: data.name,
+              value: data.team.id,
+              label: data.team.name,
             };
           });
         setTeamsList(teams);
@@ -73,20 +76,22 @@ export function FormPage() {
       });
   }
 
-  function FetchLeagues(countryName: string, season: string) {
+  function FetchLeagues(countryName: string) {
     api
-      .get(`leagues/country/${countryName}/${season}`)
+      .get(`v3/leagues`, {
+        params: {
+          country: countryName,
+        },
+      })
       .then((response) => {
         const leagues =
-          response.data.api.leagues &&
-          Object.entries(response.data.api.leagues as LeaguesData).map(
-            ([, value]) => {
-              return {
-                value: value.league_id,
-                label: value.name,
-              };
-            }
-          );
+          response.data.response &&
+          response.data.response.map((value: any) => {
+            return {
+              value: value.league.id,
+              label: value.league.name,
+            };
+          });
         setLeaguesList(leagues);
       })
       .catch(() => {
@@ -161,7 +166,7 @@ export function FormPage() {
             options={seasonsList}
             onChange={(event) => {
               setValue('season', event.target.value);
-              FetchLeagues(watch('country'), event.target.value);
+              FetchLeagues(watch('country'));
               handleClearFields(['league', 'team']);
             }}
           />
@@ -176,8 +181,9 @@ export function FormPage() {
             placeholder="Selecione uma liga"
             options={leaguesList}
             onChange={(event) => {
+              console.log(event.target.value);
               setValue('league', event.target.value);
-              FetchTeams(event.target.value);
+              FetchTeams(event.target.value, watch('season'));
               handleClearFields(['team']);
             }}
           />
