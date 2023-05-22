@@ -10,16 +10,18 @@ interface CountriesData {
   code: string;
 }
 
-type LeaguesData = {
-  [key: string]: {
-    league_id: string;
+interface TeamsDataResponse {
+  team: {
+    id: string;
     name: string;
   };
-};
+}
 
-interface TeamsData {
-  team_id: string;
-  name: string;
+interface LeagueDataResponse {
+  league: {
+    id: string;
+    name: string;
+  };
 }
 
 interface SelectData {

@@ -68,7 +68,7 @@ export function FormPage() {
       .then((response) => {
         const teams =
           response.data.response &&
-          response.data.response.map((data: any) => {
+          response.data.response.map((data: TeamsDataResponse) => {
             return {
               value: data.team.id,
               label: data.team.name,
@@ -95,7 +95,7 @@ export function FormPage() {
       .then((response) => {
         const leagues =
           response.data.response &&
-          response.data.response.map((value: any) => {
+          response.data.response.map((value: LeagueDataResponse) => {
             return {
               value: value.league.id,
               label: value.league.name,
@@ -204,7 +204,6 @@ export function FormPage() {
             placeholder="Selecione uma liga"
             options={leaguesList}
             onChange={(event) => {
-              console.log(event.target.value);
               setValue('league', event.target.value);
               FetchTeams(event.target.value, watch('season'));
               handleClearFields(['team']);

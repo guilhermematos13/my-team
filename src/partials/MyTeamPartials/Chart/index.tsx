@@ -36,7 +36,6 @@ export function Chart() {
           },
         })
         .then((response) => {
-          console.log(response.data?.response?.goals?.for?.minute);
           const goalsPercentage =
             response.data?.response?.goals?.for?.minute &&
             Object.entries(
@@ -49,7 +48,6 @@ export function Chart() {
               };
             });
           setGoalsList(goalsPercentage);
-          console.log(goalsPercentage);
         })
         .catch(() => {
           toast.error('Algo deu errado ao carregar os graficos');

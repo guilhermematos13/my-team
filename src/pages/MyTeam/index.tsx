@@ -14,12 +14,10 @@ import { toast } from 'react-hot-toast';
 import { Chart } from '../../partials/MyTeamPartials/Chart';
 
 export function MyTeam() {
+  const navigate = useNavigate();
   const { info } = useContext(MyTeamContext);
   const [loading, setLoading] = useState(true);
   const [team, setTeam] = useState<TeamData>();
-
-  const navigate = useNavigate();
-  console.log(info);
 
   useEffect(() => {
     const fetchTeam = async () => {
