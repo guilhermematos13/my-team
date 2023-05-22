@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { MenuBanner } from '../../components/MenuBanner';
 import { LineUpsModal } from '../../partials/MyTeamPartials/LineUpsModal';
@@ -18,6 +18,7 @@ export function MyTeam() {
   const [team, setTeam] = useState<TeamData>();
 
   const navigate = useNavigate();
+  console.log(info);
 
   useEffect(() => {
     const fetchTeam = async () => {

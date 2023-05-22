@@ -1,7 +1,42 @@
+import { useContext, useEffect, useState } from 'react';
 import { Modal } from '../../../components/Modal';
 import { Header, PlayerInfo } from './styles';
+import { MyTeamContext } from '../../../context/MyTeamContext';
+import { api } from '../../../services/api';
+import { toast } from 'react-hot-toast';
+
+interface PlayersData {
+  player: {
+    id: number;
+    name: string;
+    age: number;
+    nationality: string;
+  };
+}
 
 export function PlayersModal() {
+  const [playersList, setPlayersList] = useState<PlayersData[]>([]);
+  const { info } = useContext(MyTeamContext);
+
+  useEffect(() => {
+    const fetchPlayers = async () => {
+      api
+        .get('v3/players', {
+          params: {
+            team: info?.team,
+            season: info?.season,
+          },
+        })
+        .then((response) => {
+          setPlayersList(response.data.response);
+        })
+        .catch(() => {
+          toast.error('Algo deu errado');
+        });
+    };
+    fetchPlayers();
+  }, [info?.season, info?.team]);
+
   return (
     <Modal title="Jogadores">
       <Header>
@@ -10,66 +45,15 @@ export function PlayersModal() {
         <strong>Nacionalidade</strong>
       </Header>
       <div className="max-h-[50vh] overflow-y-auto">
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
-        <PlayerInfo>
-          <p>Guilherme Matos de Oliveira</p>
-          <p>24 anos</p>
-          <p>Brasil</p>
-        </PlayerInfo>
+        {playersList.map((playerInfo: PlayersData) => {
+          return (
+            <PlayerInfo key={playerInfo.player.id}>
+              <p>{playerInfo.player.name}</p>
+              <p>{playerInfo.player.age} anos</p>
+              <p>{playerInfo.player.nationality}</p>
+            </PlayerInfo>
+          );
+        })}
       </div>
     </Modal>
   );

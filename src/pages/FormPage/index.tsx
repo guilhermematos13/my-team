@@ -9,6 +9,7 @@ import { api } from '../../services/api';
 import { toast } from 'react-hot-toast';
 import { ErrorMessage } from '../../components/ErrorMessage';
 import { MyTeamContext } from '../../context/MyTeamContext';
+import { Loading } from '../../components/Loading';
 
 export function FormPage() {
   const { setInfo } = useContext(MyTeamContext);
@@ -16,6 +17,7 @@ export function FormPage() {
   const [seasonsList, setSeasonsList] = useState<SelectData[]>([]);
   const [leaguesList, setLeaguesList] = useState<SelectData[]>([]);
   const [teamsList, setTeamsList] = useState<SelectData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const {
     handleSubmit,

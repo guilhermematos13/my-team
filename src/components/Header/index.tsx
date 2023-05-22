@@ -4,7 +4,7 @@ import { Container } from './styles';
 interface HeaderProps {
   team?: boolean;
   teamTitle: string;
-  logo: string;
+  logo?: string;
 }
 
 export function Header({ team, teamTitle, logo }: HeaderProps) {
