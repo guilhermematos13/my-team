@@ -6,11 +6,15 @@ interface LoadingProps {
   width: number;
 }
 
-export function Loading({ width }: LoadingProps) {
+export function LoadingScreen({ width }: LoadingProps) {
   const theme = useTheme();
   return (
     <Container>
-      <ReactLoading type={'balls'} color={theme['green-500']} width={width} />
+      <ReactLoading
+        type={'spinningBubbles'}
+        color={theme['green-500']}
+        width={width}
+      />
     </Container>
   );
 }

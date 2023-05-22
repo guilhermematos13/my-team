@@ -9,8 +9,9 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { useContext, useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { MyTeamContext } from '../../context/MyTeamContext';
-import { Loading } from '../../components/Loading';
+import { LoadingScreen } from '../../components/LoadingScreen';
 import { toast } from 'react-hot-toast';
+import { Chart } from '../../partials/MyTeamPartials/Chart';
 
 export function MyTeam() {
   const { info } = useContext(MyTeamContext);
@@ -42,7 +43,7 @@ export function MyTeam() {
     fetchTeam();
   }, [info, navigate]);
 
-  if (!team || loading) return <Loading width={100} />;
+  if (!team || loading) return <LoadingScreen width={100} />;
   return (
     <div>
       <Header teamTitle={team?.name} team logo={team.logo} />
@@ -70,6 +71,7 @@ export function MyTeam() {
             />
           </Dialog.Root>
         </MenuContainer>
+        <Chart />
       </Container>
     </div>
   );
