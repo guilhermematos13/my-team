@@ -2,7 +2,6 @@ import { Keyhole } from '@phosphor-icons/react';
 import { Input } from '../../components/Input';
 import { Container, LoginStyled, Title } from './styles';
 import { ButtonPrimary } from '../../components/ButtonPrimary';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { fetchLogin } from '../../services/requests/login';
 import { Loading } from '../../components/Loading';
@@ -10,7 +9,6 @@ import { Loading } from '../../components/Loading';
 export function Login() {
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   return (
     <Container>
@@ -33,7 +31,7 @@ export function Login() {
               type="submit"
               title="Entrar"
               onClick={() => {
-                fetchLogin({ apiKey, setLoading, navigate });
+                fetchLogin({ apiKey, setLoading });
               }}
             />
           )}

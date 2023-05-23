@@ -4,13 +4,14 @@ import { ArrowCircleRight } from '@phosphor-icons/react';
 
 interface ButtonPrimaryProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
+  isBack?: boolean;
 }
 
-export function ButtonPrimary({ title, ...props }: ButtonPrimaryProps) {
+export function ButtonPrimary({ title, isBack, ...props }: ButtonPrimaryProps) {
   return (
     <ButtonStyled {...props}>
       {title}
-      <ArrowCircleRight size={32} />
+      {!isBack && <ArrowCircleRight size={32} />}
     </ButtonStyled>
   );
 }

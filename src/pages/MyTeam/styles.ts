@@ -9,6 +9,17 @@ export const Container = styled.div`
   padding: 0px 32px;
 `;
 
+export const ChartContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme['gray-800']};
+  padding: 30px;
+  border-radius: 8px;
+`;
+
 export const MenuContainer = styled.div`
   width: 100%;
   align-items: center;

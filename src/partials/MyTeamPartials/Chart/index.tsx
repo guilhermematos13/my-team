@@ -1,11 +1,11 @@
 import { VictoryChart, VictoryBar, VictoryAxis, VictoryStack } from 'victory';
-import { ChartContainer } from './styles';
+import { TitleStyled } from './styles';
 import { Loading } from '../../../components/Loading';
 
 export function Chart({ goalsList, loading }: ChartProps) {
   return (
-    <ChartContainer>
-      <h2>Quantidade de gols marcados por tempo de jogo:</h2>
+    <>
+      <TitleStyled>Quantidade de gols marcados por tempo de jogo:</TitleStyled>
       {loading ? (
         <Loading width={50} />
       ) : (
@@ -37,6 +37,6 @@ export function Chart({ goalsList, loading }: ChartProps) {
           />
         </VictoryChart>
       )}
-    </ChartContainer>
+    </>
   );
 }

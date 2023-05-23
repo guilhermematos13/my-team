@@ -4,7 +4,7 @@ import { MenuBanner } from '../../components/MenuBanner';
 import { LineUpsModal } from '../../partials/MyTeamPartials/LineUpsModal';
 import { PlayersModal } from '../../partials/MyTeamPartials/PlayersModal';
 import { StatisticModal } from '../../partials/MyTeamPartials/StatisticModal';
-import { Container, MenuContainer } from './styles';
+import { ChartContainer, Container, MenuContainer } from './styles';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useContext, useEffect, useState } from 'react';
 import { MyTeamContext } from '../../context/MyTeamContext';
@@ -12,6 +12,7 @@ import { LoadingScreen } from '../../components/LoadingScreen';
 import { Chart } from '../../partials/MyTeamPartials/Chart';
 import { fetchTeam } from '../../services/requests/team';
 import { fetchLineUps } from '../../services';
+import { ButtonPrimary } from '../../components/ButtonPrimary';
 
 export function MyTeam() {
   const navigate = useNavigate();
@@ -55,7 +56,16 @@ export function MyTeam() {
             />
           </Dialog.Root>
         </MenuContainer>
-        <Chart goalsList={goalsList} loading={loading} />
+        <ChartContainer>
+          <Chart goalsList={goalsList} loading={loading} />
+          <ButtonPrimary
+            title="Voltar"
+            isBack
+            onClick={() => {
+              navigate('/selecao-time');
+            }}
+          />
+        </ChartContainer>
       </Container>
     </div>
   );
