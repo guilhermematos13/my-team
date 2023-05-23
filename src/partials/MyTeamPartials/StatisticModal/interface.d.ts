@@ -4,17 +4,7 @@ interface StatisticData {
   wins?: number;
   loses?: number;
 }
-interface StatisticDataResponse {
-  played: {
-    total: number;
-  };
-  draws: {
-    total: number;
-  };
-  wins: {
-    total: number;
-  };
-  loses: {
-    total: number;
-  };
+
+interface StatisticProps {
+  getStatistic?: StatisticData;
 }

@@ -1,50 +1,24 @@
-import { useContext, useEffect, useState } from 'react';
 import { Modal } from '../../../components/Modal';
-import { MyTeamContext } from '../../../context/MyTeamContext';
 import { Content, Header } from './styles';
-import { api } from '../../../services/api';
-import { toast } from 'react-hot-toast';
 
-export function LineUpsModal() {
-  const [lineUpList, setLineUpList] = useState([]);
-  const { info } = useContext(MyTeamContext);
-
-  useEffect(() => {
-    const fetchLineUps = async () => {
-      api
-        .get('v3/teams/statistics', {
-          params: {
-            team: info?.team,
-            season: info?.season,
-            league: info?.league,
-          },
-        })
-        .then((response) => {
-          setLineUpList(response.data.response.lineups);
-        })
-        .catch(() => {
-          toast.error('Algo deu errado');
-        });
-    };
-    fetchLineUps();
-  }, [info?.season, info?.team, info?.league]);
-
+export function LineUpsModal({ lineUpList }: { lineUpList: LineUpsData[] }) {
   return (
     <Modal title="Formações">
       <Header>
         <strong>Formação</strong>
         <strong>Vezes utilizadas</strong>
       </Header>
-
-      {lineUpList &&
-        lineUpList.map((data: LineUpsData) => {
-          return (
-            <Content key={data.formation}>
-              <p>{data.formation}</p>
-              <p>{data.played} vez(es)</p>
-            </Content>
-          );
-        })}
+      <div className="max-h-[50vh] overflow-y-auto">
+        {lineUpList &&
+          lineUpList.map((data: LineUpsData) => {
+            return (
+              <Content key={data.formation}>
+                <p>{data.formation}</p>
+                <p>{data.played} vez(es)</p>
+              </Content>
+            );
+          })}
+      </div>
     </Modal>
   );
 }

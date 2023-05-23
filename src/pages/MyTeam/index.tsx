@@ -7,38 +7,24 @@ import { StatisticModal } from '../../partials/MyTeamPartials/StatisticModal';
 import { Container, MenuContainer } from './styles';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useContext, useEffect, useState } from 'react';
-import { api } from '../../services/api';
 import { MyTeamContext } from '../../context/MyTeamContext';
 import { LoadingScreen } from '../../components/LoadingScreen';
-import { toast } from 'react-hot-toast';
 import { Chart } from '../../partials/MyTeamPartials/Chart';
+import { fetchTeam } from '../../services/requests/team';
+import { fetchLineUps } from '../../services';
 
 export function MyTeam() {
   const navigate = useNavigate();
   const { info } = useContext(MyTeamContext);
   const [loading, setLoading] = useState(true);
   const [team, setTeam] = useState<TeamData>();
+  const [getStatistic, setGetStatistic] = useState<StatisticData>();
+  const [goalsList, setGoalsList] = useState<GoalsData[]>([]);
+  const [lineUpList, setLineUpList] = useState<LineUpsData[]>([]);
 
   useEffect(() => {
-    const fetchTeam = async () => {
-      api
-        .get(`teams/team/${info?.team}`)
-        .then((response) => {
-          info?.team && response.data.api.teams
-            ? setTeam(response.data.api.teams[info?.team])
-            : (toast.error('Não conseguimos achar seu time'),
-              navigate('/selecao-time'));
-        })
-        .catch(() => {
-          toast.error('Algo deu errado!');
-          navigate('/selecao-time');
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    };
-
-    fetchTeam();
+    fetchTeam({ info, navigate, setLoading, setTeam });
+    fetchLineUps({ info, setGetStatistic, setGoalsList, setLineUpList });
   }, [info, navigate]);
 
   if (!team || loading) return <LoadingScreen width={100} />;
@@ -48,14 +34,14 @@ export function MyTeam() {
       <Container>
         <MenuContainer>
           <Dialog.Root>
-            <LineUpsModal />
+            <LineUpsModal lineUpList={lineUpList} />
             <MenuBanner
               title="Formações"
               buttonTitle="Clique aqui para ver as formações"
             />
           </Dialog.Root>
           <Dialog.Root>
-            <StatisticModal />
+            <StatisticModal getStatistic={getStatistic} />
             <MenuBanner
               title="Estatísticas"
               buttonTitle="Clique aqui para ver as estatísticas"
@@ -69,7 +55,7 @@ export function MyTeam() {
             />
           </Dialog.Root>
         </MenuContainer>
-        <Chart />
+        <Chart goalsList={goalsList} loading={loading} />
       </Container>
     </div>
   );

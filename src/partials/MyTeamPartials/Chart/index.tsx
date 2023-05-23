@@ -1,50 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
-import { api } from '../../../services/api';
-import { MyTeamContext } from '../../../context/MyTeamContext';
 import { VictoryChart, VictoryBar, VictoryAxis, VictoryStack } from 'victory';
 import { ChartContainer } from './styles';
-import { toast } from 'react-hot-toast';
 import { Loading } from '../../../components/Loading';
 
-export function Chart() {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [goalsList, setGoalsList] = useState<GoalsData[]>([]);
-  const { info } = useContext(MyTeamContext);
-
-  useEffect(() => {
-    function fetchGoalsList() {
-      api
-        .get('v3/teams/statistics', {
-          params: {
-            league: info?.league,
-            season: info?.season,
-            team: info?.team,
-          },
-        })
-        .then((response) => {
-          const goalsPercentage =
-            response.data?.response?.goals?.for?.minute &&
-            Object.entries(
-              response.data.response.goals.for.minute as GoalsDataResponse
-            ).map(([key, value]) => {
-              return {
-                x: key,
-                y: value.total,
-                label: value.total,
-              };
-            });
-          setGoalsList(goalsPercentage);
-        })
-        .catch(() => {
-          toast.error('Algo deu errado ao carregar os graficos');
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-    fetchGoalsList();
-  }, [info?.league, info?.season, info?.team]);
-
+export function Chart({ goalsList, loading }: ChartProps) {
   return (
     <ChartContainer>
       <h2>Quantidade de gols marcados por tempo de jogo:</h2>

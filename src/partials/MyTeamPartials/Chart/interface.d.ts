@@ -4,10 +4,7 @@ interface GoalsData {
   y: number;
 }
 
-type GoalsDataResponse = {
-  [key: string]: {
-    title: string;
-    percentage: string;
-    total: string;
-  };
-};
+interface ChartProps {
+  goalsList: GoalsData[];
+  loading: boolean;
+}

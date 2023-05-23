@@ -2,31 +2,18 @@ import { useContext, useEffect, useState } from 'react';
 import { Modal } from '../../../components/Modal';
 import { Header, PlayerInfo } from './styles';
 import { MyTeamContext } from '../../../context/MyTeamContext';
-import { api } from '../../../services/api';
-import { toast } from 'react-hot-toast';
+import { fetchPlayers } from '../../../services';
 
 export function PlayersModal() {
   const [playersList, setPlayersList] = useState<PlayersData[]>([]);
   const { info } = useContext(MyTeamContext);
 
   useEffect(() => {
-    const fetchPlayers = async () => {
-      api
-        .get('v3/players', {
-          params: {
-            team: info?.team,
-            season: info?.season,
-          },
-        })
-        .then((response) => {
-          setPlayersList(response.data.response);
-        })
-        .catch(() => {
-          toast.error('Algo deu errado');
-        });
-    };
-    fetchPlayers();
-  }, [info?.season, info?.team]);
+    fetchPlayers({
+      info,
+      setPlayersList,
+    });
+  }, [info]);
 
   return (
     <Modal title="Jogadores">

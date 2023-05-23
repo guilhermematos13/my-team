@@ -5,10 +5,14 @@ import { ButtonContainer, Container, FormContainer, Title } from './styles';
 import { useForm } from 'react-hook-form';
 import { InputSelect } from '../../components/InputSelect';
 import { useContext, useEffect, useState } from 'react';
-import { api } from '../../services/api';
-import { toast } from 'react-hot-toast';
 import { ErrorMessage } from '../../components/ErrorMessage';
 import { MyTeamContext } from '../../context/MyTeamContext';
+import {
+  fetchTeamsByLeagueAndBySeason,
+  fetchCountries,
+  fetchSeasons,
+  fetchLeagues,
+} from '../../services';
 
 export function FormPage() {
   const { setInfo } = useContext(MyTeamContext);
@@ -56,105 +60,9 @@ export function FormPage() {
     navigate('/meu-time');
   };
 
-  function FetchTeams(leagueId: string, seasonId: string) {
-    setTeamLoading(true);
-    api
-      .get(`v3/teams`, {
-        params: {
-          league: leagueId,
-          season: seasonId,
-        },
-      })
-      .then((response) => {
-        const teams =
-          response.data.response &&
-          response.data.response.map((data: TeamsDataResponse) => {
-            return {
-              value: data.team.id,
-              label: data.team.name,
-            };
-          });
-        setTeamsList(teams);
-      })
-      .catch(() => {
-        toast.error('Algo deu errado ao buscar os times');
-      })
-      .finally(() => {
-        setTeamLoading(false);
-      });
-  }
-
-  function FetchLeagues(countryName: string) {
-    setLeagueLoading(true);
-    api
-      .get(`v3/leagues`, {
-        params: {
-          country: countryName,
-        },
-      })
-      .then((response) => {
-        const leagues =
-          response.data.response &&
-          response.data.response.map((value: LeagueDataResponse) => {
-            return {
-              value: value.league.id,
-              label: value.league.name,
-            };
-          });
-        setLeaguesList(leagues);
-      })
-      .catch(() => {
-        toast.error('Algo deu errado ao buscar as ligas');
-      })
-      .finally(() => {
-        setLeagueLoading(false);
-      });
-  }
-
-  function FetchSeasons() {
-    setSeasonLoading(true);
-    api
-      .get('seasons')
-      .then((response) => {
-        const seasons =
-          response.data.api.seasons &&
-          Object.entries(response.data.api.seasons).map((season) => {
-            return { value: season[1], label: season[1] };
-          });
-        setSeasonsList(seasons);
-      })
-      .catch(() => {
-        toast.error('Algo deu errado ao buscar as temporadas');
-      })
-      .finally(() => {
-        setSeasonLoading(false);
-      });
-  }
-
-  function FetchCountries() {
-    setCountryLoading(true);
-    api
-      .get('countries')
-      .then((response) => {
-        const countries =
-          response.data.api.countries &&
-          Object.entries(response.data.api.countries).map((country) => {
-            return { value: country[1], label: country[1] };
-          });
-
-        setCountriesList(countries);
-      })
-      .catch(() => {
-        toast.error('Algo deu errado ao buscar os países');
-      })
-      .finally(() => {
-        setCountryLoading(false);
-      });
-  }
-
   useEffect(() => {
-    FetchCountries();
-    FetchSeasons();
+    fetchCountries({ setCountriesList, setCountryLoading });
+    fetchSeasons({ setSeasonLoading, setSeasonsList });
   }, []);
 
   return (
@@ -188,7 +96,11 @@ export function FormPage() {
             options={seasonsList}
             onChange={(event) => {
               setValue('season', event.target.value);
-              FetchLeagues(watch('country'));
+              fetchLeagues({
+                countryName: watch('country'),
+                setLeagueLoading,
+                setLeaguesList,
+              });
               handleClearFields(['league', 'team']);
             }}
           />
@@ -205,7 +117,12 @@ export function FormPage() {
             options={leaguesList}
             onChange={(event) => {
               setValue('league', event.target.value);
-              FetchTeams(event.target.value, watch('season'));
+              fetchTeamsByLeagueAndBySeason({
+                leagueId: event.target.value,
+                seasonId: watch('season'),
+                setTeamLoading,
+                setTeamsList,
+              });
               handleClearFields(['team']);
             }}
           />
