@@ -11,11 +11,19 @@ export const Content = styled.div`
   p {
     font-size: 1.25rem;
     color: ${(props) => props.theme['gray-100']};
+
+    @media screen and (max-width: 425px) {
+      font-size: 1rem;
+    }
   }
 
   strong {
     font-size: 1.25rem;
     color: ${(props) => props.theme['gray-100']};
     font-weight: bold;
+
+    @media screen and (max-width: 425px) {
+      font-size: 1rem;
+    }
   }
 `;

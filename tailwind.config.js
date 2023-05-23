@@ -3,7 +3,11 @@ module.exports = {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   darkMode: 'media',
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '425px',
+      },
+    },
   },
   variants: {
     extend: {},

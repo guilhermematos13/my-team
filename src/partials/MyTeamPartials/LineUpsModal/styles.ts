@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Header = styled.div`
-  width: 576px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,6 +12,14 @@ export const Header = styled.div`
   strong {
     font-size: 1.25rem;
     color: ${(props) => props.theme['gray-100']};
+  }
+
+  @media screen and (max-width: 425px) {
+    padding: 8px 12px;
+
+    strong {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -26,5 +34,13 @@ export const Content = styled.div`
   p {
     font-size: 1.25rem;
     color: ${(props) => props.theme['gray-100']};
+  }
+
+  @media screen and (max-width: 425px) {
+    padding: 8px 12px;
+
+    p {
+      font-size: 1rem;
+    }
   }
 `;

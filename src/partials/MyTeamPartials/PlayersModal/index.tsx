@@ -20,7 +20,7 @@ export function PlayersModal() {
       <Header>
         <strong>Nome do Jogador</strong>
         <strong>Idade</strong>
-        <strong>Nacionalidade</strong>
+        <strong>País</strong>
       </Header>
       <div className="max-h-[50vh] overflow-y-auto">
         {playersList.map((playerInfo: PlayersData) => {

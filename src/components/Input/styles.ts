@@ -23,9 +23,20 @@ export const Container = styled.div`
     ::placeholder {
       ${(props) => props.theme['gray-400']}
     }
+
+    @media screen and (max-width: 425px) {
+      font-size: 0.75rem;
+    }
   }
 
   svg {
     color: ${(props) => props.theme['gray-100']};
+    width: 2rem;
+    height: 2rem;
+
+    @media screen and (max-width: 425px) {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 `;

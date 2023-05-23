@@ -12,7 +12,7 @@ export function Login() {
       <LoginStyled>
         <Title>API Key</Title>
         <Input
-          icon={<Keyhole size={32} />}
+          icon={<Keyhole />}
           type="text"
           placeholder="Insira sua chave de autenticação"
         />

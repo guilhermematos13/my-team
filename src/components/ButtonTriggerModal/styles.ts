@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ButtonStyled = styled.button`
   padding: 16px 8px;
-  width: 348px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,6 +16,10 @@ export const ButtonStyled = styled.button`
   font-size: 1rem;
   color: ${(props) => props.theme['gray-100']};
   cursor: pointer;
+
+  @media screen and (max-width: 425px) {
+    flex-direction: column;
+  }
 
   :hover {
     background-color: ${(props) => props.theme['green-700']};

@@ -11,6 +11,10 @@ export const Container = styled.form`
 export const Title = styled.p`
   font-size: 1.5rem;
   color: ${(props) => props.theme['gray-100']};
+
+  @media screen and (max-width: 425px) {
+    font-size: 1rem;
+  }
 `;
 
 export const LoginStyled = styled.div`
@@ -23,6 +27,10 @@ export const LoginStyled = styled.div`
   justify-content: center;
 
   background-color: ${(props) => props.theme['gray-800']};
+
+  @media screen and (max-width: 425px) {
+    padding: 16px 32px;
+  }
 
   div {
     width: 100%;
