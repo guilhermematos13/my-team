@@ -15,58 +15,49 @@ import { fetchLineUps } from '../../services';
 import { ButtonPrimary } from '../../components/ButtonPrimary';
 
 export function MyTeam() {
-  const navigate = useNavigate();
-  const { info } = useContext(MyTeamContext);
-  const [loading, setLoading] = useState(true);
-  const [team, setTeam] = useState<TeamData>();
-  const [getStatistic, setGetStatistic] = useState<StatisticData>();
-  const [goalsList, setGoalsList] = useState<GoalsData[]>([]);
-  const [lineUpList, setLineUpList] = useState<LineUpsData[]>([]);
+    const navigate = useNavigate();
+    const { info } = useContext(MyTeamContext);
+    const [loading, setLoading] = useState(true);
+    const [team, setTeam] = useState<TeamData>();
+    const [getStatistic, setGetStatistic] = useState<StatisticData>();
+    const [goalsList, setGoalsList] = useState<GoalsData[]>([]);
+    const [lineUpList, setLineUpList] = useState<LineUpsData[]>([]);
 
-  useEffect(() => {
-    fetchTeam({ info, navigate, setLoading, setTeam });
-    fetchLineUps({ info, setGetStatistic, setGoalsList, setLineUpList });
-  }, [info, navigate]);
+    useEffect(() => {
+        fetchTeam({ info, navigate, setLoading, setTeam });
+        fetchLineUps({ info, setGetStatistic, setGoalsList, setLineUpList });
+    }, [info, navigate]);
 
-  if (!team || loading) return <LoadingScreen width={100} />;
-  return (
-    <div>
-      <Header teamTitle={team?.name} team logo={team.logo} />
-      <Container>
-        <MenuContainer>
-          <Dialog.Root>
-            <LineUpsModal lineUpList={lineUpList} />
-            <MenuBanner
-              title="Formações"
-              buttonTitle="Clique aqui para ver as formações"
-            />
-          </Dialog.Root>
-          <Dialog.Root>
-            <StatisticModal getStatistic={getStatistic} />
-            <MenuBanner
-              title="Estatísticas"
-              buttonTitle="Clique aqui para ver as estatísticas"
-            />
-          </Dialog.Root>
-          <Dialog.Root>
-            <PlayersModal />
-            <MenuBanner
-              title="Jogadores"
-              buttonTitle="Clique aqui para ver os jogadores"
-            />
-          </Dialog.Root>
-        </MenuContainer>
-        <ChartContainer>
-          <Chart goalsList={goalsList} loading={loading} />
-          <ButtonPrimary
-            title="Voltar"
-            isBack
-            onClick={() => {
-              navigate('/selecao-time');
-            }}
-          />
-        </ChartContainer>
-      </Container>
-    </div>
-  );
+    if (loading) return <LoadingScreen width={100} />;
+    return (
+        <div>
+            <Header teamTitle={team?.name as string} team logo={team?.logo as string} />
+            <Container>
+                <MenuContainer>
+                    <Dialog.Root>
+                        <LineUpsModal lineUpList={lineUpList} />
+                        <MenuBanner title="Formações" buttonTitle="Clique aqui para ver as formações" />
+                    </Dialog.Root>
+                    <Dialog.Root>
+                        <StatisticModal getStatistic={getStatistic} />
+                        <MenuBanner title="Estatísticas" buttonTitle="Clique aqui para ver as estatísticas" />
+                    </Dialog.Root>
+                    <Dialog.Root>
+                        <PlayersModal />
+                        <MenuBanner title="Jogadores" buttonTitle="Clique aqui para ver os jogadores" />
+                    </Dialog.Root>
+                </MenuContainer>
+                <ChartContainer>
+                    <Chart goalsList={goalsList} loading={loading} />
+                    <ButtonPrimary
+                        title="Voltar"
+                        isBack
+                        onClick={() => {
+                            navigate('/selecao-time');
+                        }}
+                    />
+                </ChartContainer>
+            </Container>
+        </div>
+    );
 }
