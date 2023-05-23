@@ -1,5 +1,6 @@
 import { SignOut } from '@phosphor-icons/react';
 import { Container } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   team?: boolean;
@@ -8,6 +9,13 @@ interface HeaderProps {
 }
 
 export function Header({ team, teamTitle, logo }: HeaderProps) {
+  const navigate = useNavigate();
+
+  function logout() {
+    localStorage.removeItem('token');
+    navigate('/');
+  }
+
   return (
     <Container>
       {team ? (
@@ -18,7 +26,7 @@ export function Header({ team, teamTitle, logo }: HeaderProps) {
         <div className="withoutTeam" />
       )}
       <strong>{teamTitle}</strong>
-      <button>
+      <button onClick={logout}>
         Sair
         <SignOut />
       </button>

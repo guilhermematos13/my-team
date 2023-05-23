@@ -6,11 +6,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
 }
 
-export function Input({ icon, placeholder }: InputProps) {
+export function Input({ icon, placeholder, ...props }: InputProps) {
   return (
     <Container>
       {icon && icon}
-      <input placeholder={placeholder} />
+      <input placeholder={placeholder} {...props} />
     </Container>
   );
 }

@@ -21,4 +21,9 @@ export const ButtonStyled = styled.button`
     transition-timing-function: ease-out;
     transition-duration: 300ms;
   }
+
+  :disabled {
+    background-color: ${(props) => props.theme['gray-400']};
+    cursor: not-allowed;
+  }
 `;
