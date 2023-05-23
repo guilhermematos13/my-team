@@ -1,4 +1,4 @@
 interface LineUpsData {
-  formation: string;
-  played: number;
+    formation: string;
+    played: number;
 }

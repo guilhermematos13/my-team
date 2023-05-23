@@ -1,10 +1,10 @@
 interface GoalsData {
-  x: string;
-  label: string;
-  y: number;
+    x: string;
+    label: string;
+    y: number;
 }
 
 interface ChartProps {
-  goalsList: GoalsData[];
-  loading: boolean;
+    goalsList: GoalsData[];
+    loading: boolean;
 }

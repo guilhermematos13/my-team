@@ -1,17 +1,17 @@
 import { ReactNode, SetStateAction } from 'react';
 
 interface MyTeamContextType {
-  info: InfoData | undefined;
-  setInfo: React.Dispatch<SetStateAction<InfoData | undefined>>;
+    info: InfoData | undefined;
+    setInfo: React.Dispatch<SetStateAction<InfoData | undefined>>;
 }
 
 interface MyTeamProviderProps {
-  children: ReactNode;
+    children: ReactNode;
 }
 
 interface InfoData {
-  country: string;
-  season: string;
-  league: string;
-  team: string;
+    country: string;
+    season: string;
+    league: string;
+    team: string;
 }

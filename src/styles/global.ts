@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body {
-    background-color: ${(props) => props.theme['gray-900']};
+    background-color: ${props => props.theme['gray-900']};
     min-height: 100vh;
 };
 
@@ -19,12 +19,12 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px ${(props) => props.theme['gray-100']};
+    box-shadow: inset 0 0 5px ${props => props.theme['gray-100']};
     border-radius: 8px;
     margin-top: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: ${(props) => props.theme['green-700']};
+    background: ${props => props.theme['green-700']};
 }
 `;

@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 24px;
-  padding: 24px 30px;
-  border-radius: 8px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 30px;
+    border-radius: 8px;
 
-  background-color: ${(props) => props.theme['gray-800']};
+    background-color: ${props => props.theme['gray-800']};
 
-  h2 {
-    color: ${(props) => props.theme['gray-100']};
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
+    h2 {
+        color: ${props => props.theme['gray-100']};
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 `;

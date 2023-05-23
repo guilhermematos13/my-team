@@ -7,36 +7,36 @@ import { fetchLogin } from '../../services/requests/login';
 import { Loading } from '../../components/Loading';
 
 export function Login() {
-  const [apiKey, setApiKey] = useState('');
-  const [loading, setLoading] = useState(false);
+    const [apiKey, setApiKey] = useState('');
+    const [loading, setLoading] = useState(false);
 
-  return (
-    <Container>
-      <LoginStyled>
-        <Title>API Key</Title>
-        <Input
-          icon={<Keyhole />}
-          type="text"
-          placeholder="Insira sua chave de autenticação"
-          onChange={(event) => {
-            setApiKey(event.target.value);
-          }}
-        />
-        <div>
-          {loading ? (
-            <Loading width={50} />
-          ) : (
-            <ButtonPrimary
-              disabled={apiKey === ''}
-              type="submit"
-              title="Entrar"
-              onClick={() => {
-                fetchLogin({ apiKey, setLoading });
-              }}
-            />
-          )}
-        </div>
-      </LoginStyled>
-    </Container>
-  );
+    return (
+        <Container>
+            <LoginStyled>
+                <Title>API Key</Title>
+                <Input
+                    icon={<Keyhole />}
+                    type="text"
+                    placeholder="Insira sua chave de autenticação"
+                    onChange={event => {
+                        setApiKey(event.target.value);
+                    }}
+                />
+                <div>
+                    {loading ? (
+                        <Loading width={50} />
+                    ) : (
+                        <ButtonPrimary
+                            disabled={apiKey === ''}
+                            type="submit"
+                            title="Entrar"
+                            onClick={() => {
+                                fetchLogin({ apiKey, setLoading });
+                            }}
+                        />
+                    )}
+                </div>
+            </LoginStyled>
+        </Container>
+    );
 }

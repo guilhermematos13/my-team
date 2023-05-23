@@ -7,15 +7,15 @@ import { MyTeamContextProvider } from './context/MyTeamContext';
 import { Toaster } from 'react-hot-toast';
 
 export function App() {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <BrowserRouter>
-        <MyTeamContextProvider>
-          <Toaster />
-          <GlobalStyle />
-          <Router />
-        </MyTeamContextProvider>
-      </BrowserRouter>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={defaultTheme}>
+            <BrowserRouter>
+                <MyTeamContextProvider>
+                    <Toaster />
+                    <GlobalStyle />
+                    <Router />
+                </MyTeamContextProvider>
+            </BrowserRouter>
+        </ThemeProvider>
+    );
 }
