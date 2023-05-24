@@ -2,9 +2,9 @@ import { toast } from 'react-hot-toast';
 import { api } from '../../api';
 import { getSeasonsInterface } from './interface';
 
-export const fetchSeasons = ({ setSeasonLoading, setSeasonsList }: getSeasonsInterface) => {
+export const fetchSeasons = ({ setSeasonLoading, setSeasonsList, getHeaders }: getSeasonsInterface) => {
     setSeasonLoading(true);
-    api.get('seasons')
+    api.get('seasons', { headers: getHeaders })
         .then(response => {
             const seasons =
                 response.data.api.seasons &&

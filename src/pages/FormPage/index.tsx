@@ -10,7 +10,7 @@ import { MyTeamContext } from '../../context/MyTeamContext';
 import { fetchTeamsByLeagueAndBySeason, fetchCountries, fetchSeasons, fetchLeagues } from '../../services';
 
 export function FormPage() {
-    const { setInfo } = useContext(MyTeamContext);
+    const { setInfo, getHeaders } = useContext(MyTeamContext);
     const [countriesList, setCountriesList] = useState<SelectData[]>([]);
     const [seasonsList, setSeasonsList] = useState<SelectData[]>([]);
     const [leaguesList, setLeaguesList] = useState<SelectData[]>([]);
@@ -53,9 +53,9 @@ export function FormPage() {
     };
 
     useEffect(() => {
-        fetchCountries({ setCountriesList, setCountryLoading });
-        fetchSeasons({ setSeasonLoading, setSeasonsList });
-    }, []);
+        fetchCountries({ setCountriesList, setCountryLoading, getHeaders });
+        fetchSeasons({ setSeasonLoading, setSeasonsList, getHeaders });
+    }, [getHeaders]);
 
     return (
         <div>
@@ -90,6 +90,7 @@ export function FormPage() {
                                 countryName: watch('country'),
                                 setLeagueLoading,
                                 setLeaguesList,
+                                getHeaders,
                             });
                             handleClearFields(['league', 'team']);
                         }}
@@ -110,6 +111,7 @@ export function FormPage() {
                                 seasonId: watch('season'),
                                 setTeamLoading,
                                 setTeamsList,
+                                getHeaders,
                             });
                             handleClearFields(['team']);
                         }}

@@ -69,6 +69,7 @@ Run ESLint / Rodar o ESLint
 -   Conexão com API / Connection with API
 -   Dados introduzidos da API / Data introduced from the API
 -   Criação de Rotas / Creation of Routes
+-   Login Automático / Auto Login
 -   Validação da Key do Usuário / User Key Validation
 -   Selects personalizados de acordo com o que o usuário seleciona / Customized Selects according to what the user selects
 -   Feedbacks ao Usuário / User Feedbacks

@@ -4,4 +4,5 @@ import { InfoData } from '../../../context/interface';
 interface getPlayersInterface {
     setPlayersList: Dispatch<SetStateAction>;
     info?: InfoData;
+    getHeaders: AxiosHeaderValue<HeadersData>;
 }

@@ -6,14 +6,15 @@ import { fetchPlayers } from '../../../services';
 
 export function PlayersModal() {
     const [playersList, setPlayersList] = useState<PlayersData[]>([]);
-    const { info } = useContext(MyTeamContext);
+    const { info, getHeaders } = useContext(MyTeamContext);
 
     useEffect(() => {
         fetchPlayers({
             info,
             setPlayersList,
+            getHeaders,
         });
-    }, [info]);
+    }, [info, getHeaders]);
 
     return (
         <Modal title="Jogadores">

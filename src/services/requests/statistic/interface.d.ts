@@ -6,6 +6,7 @@ interface getLineUpStatisticsInterface {
     setGetStatistic: Dispatch<SetStateAction>;
     setGoalsList: Dispatch<SetStateAction>;
     setLineUpList: Dispatch<SetStateAction>;
+    getHeaders: AxiosHeaderValue<HeadersData>;
 }
 
 type GoalsDataResponse = {

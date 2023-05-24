@@ -5,6 +5,7 @@ interface MyTeamContextType {
     setInfo: React.Dispatch<SetStateAction<InfoData | undefined>>;
     token: string | undefined;
     setToken: React.Dispatch<SetStateAction<string | undefined>>;
+    getHeaders: AxiosHeaderValue<HeadersData>;
 }
 
 interface MyTeamProviderProps {
@@ -16,4 +17,9 @@ interface InfoData {
     season: string;
     league: string;
     team: string;
+}
+
+interface HeadersData {
+    'x-rapidapi-host': string;
+    'x-rapidapi-key': string | undefined;
 }

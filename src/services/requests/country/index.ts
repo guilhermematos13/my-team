@@ -2,9 +2,11 @@ import { toast } from 'react-hot-toast';
 import { api } from '../../api';
 import { getCountriesInterface } from './interface';
 
-export const fetchCountries = ({ setCountryLoading, setCountriesList }: getCountriesInterface) => {
+export const fetchCountries = ({ setCountryLoading, setCountriesList, getHeaders }: getCountriesInterface) => {
     setCountryLoading(true);
-    api.get('countries')
+    api.get('countries', {
+        headers: getHeaders,
+    })
         .then(response => {
             const countries =
                 response.data.api.countries &&

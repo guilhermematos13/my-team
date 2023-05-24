@@ -6,6 +6,7 @@ interface getTeamInterface {
     setTeam: Dispatch<SetStateAction>;
     setLoading: Dispatch<SetStateAction>;
     navigate: NavigateFunction;
+    getHeaders: AxiosHeaderValue<HeadersData>;
 }
 
 interface getTeamByLeagueAndBySeasonInterface {
@@ -13,4 +14,5 @@ interface getTeamByLeagueAndBySeasonInterface {
     seasonId: string;
     setTeamLoading: Dispatch<SetStateAction>;
     setTeamsList: Dispatch<SetStateAction>;
+    getHeaders: AxiosHeaderValue<HeadersData>;
 }

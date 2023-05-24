@@ -2,8 +2,8 @@ import { toast } from 'react-hot-toast';
 import { api } from '../../api';
 import { getTeamByLeagueAndBySeasonInterface, getTeamInterface } from './interface';
 
-export const fetchTeam = async ({ info, setTeam, setLoading, navigate }: getTeamInterface) => {
-    api.get(`teams/team/${info?.team}`)
+export const fetchTeam = async ({ info, setTeam, setLoading, navigate, getHeaders }: getTeamInterface) => {
+    api.get(`teams/team/${info?.team}`, { headers: getHeaders })
         .then(response => {
             info?.team && response.data.api.teams
                 ? setTeam(response.data.api.teams[info?.team])
@@ -23,6 +23,7 @@ export const fetchTeamsByLeagueAndBySeason = ({
     seasonId,
     setTeamLoading,
     setTeamsList,
+    getHeaders,
 }: getTeamByLeagueAndBySeasonInterface) => {
     setTeamLoading(true);
     api.get(`v3/teams`, {
@@ -30,6 +31,7 @@ export const fetchTeamsByLeagueAndBySeason = ({
             league: leagueId,
             season: seasonId,
         },
+        headers: getHeaders,
     })
         .then(response => {
             const teams =

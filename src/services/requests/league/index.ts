@@ -2,12 +2,13 @@ import { toast } from 'react-hot-toast';
 import { api } from '../../api';
 import { getLeaguesInterface } from './interface';
 
-export const fetchLeagues = ({ setLeagueLoading, setLeaguesList, countryName }: getLeaguesInterface) => {
+export const fetchLeagues = ({ setLeagueLoading, setLeaguesList, countryName, getHeaders }: getLeaguesInterface) => {
     setLeagueLoading(true);
     api.get(`v3/leagues`, {
         params: {
             country: countryName,
         },
+        headers: getHeaders,
     })
         .then(response => {
             const leagues =

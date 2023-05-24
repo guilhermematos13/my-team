@@ -16,7 +16,7 @@ import { ButtonPrimary } from '../../components/ButtonPrimary';
 
 export function MyTeam() {
     const navigate = useNavigate();
-    const { info } = useContext(MyTeamContext);
+    const { info, getHeaders } = useContext(MyTeamContext);
     const [loading, setLoading] = useState(true);
     const [team, setTeam] = useState<TeamData>();
     const [getStatistic, setGetStatistic] = useState<StatisticData>();
@@ -24,9 +24,9 @@ export function MyTeam() {
     const [lineUpList, setLineUpList] = useState<LineUpsData[]>([]);
 
     useEffect(() => {
-        fetchTeam({ info, navigate, setLoading, setTeam });
-        fetchLineUps({ info, setGetStatistic, setGoalsList, setLineUpList });
-    }, [info, navigate]);
+        fetchTeam({ info, navigate, setLoading, setTeam, getHeaders });
+        fetchLineUps({ info, setGetStatistic, setGoalsList, setLineUpList, getHeaders });
+    }, [info, navigate, getHeaders]);
 
     if (loading) return <LoadingScreen width={100} />;
     return (

@@ -7,6 +7,7 @@ export const fetchLineUps = async ({
     setGetStatistic,
     setGoalsList,
     setLineUpList,
+    getHeaders,
 }: getLineUpStatisticsInterface) => {
     api.get('v3/teams/statistics', {
         params: {
@@ -14,6 +15,7 @@ export const fetchLineUps = async ({
             season: info?.season,
             league: info?.league,
         },
+        headers: getHeaders,
     })
         .then(response => {
             const fixtures: StatisticDataResponse = response.data.response.fixtures;

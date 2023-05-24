@@ -16,9 +16,17 @@ export function Router() {
         return <Navigate to="/" replace={true} />;
     }
 
+    function autoLogin(element: JSX.Element) {
+        const tokenStorage = localStorage.getItem('token');
+        if (tokenStorage || token) {
+            return <Navigate to="/selecao-time" replace={true} />;
+        }
+        return element;
+    }
+
     return (
         <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={autoLogin(<Login />)} />
             <Route path="/selecao-time" element={isAuth(<FormPage />)} />
             <Route path="/meu-time" element={isAuth(<MyTeam />)} />
         </Routes>
