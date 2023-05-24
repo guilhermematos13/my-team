@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AES } from 'crypto-js';
 import { getLoginInterface } from './interface';
 
-export const fetchLogin = ({ apiKey, setLoading, navigate }: getLoginInterface) => {
+export const fetchLogin = ({ apiKey, setLoading, navigate, setToken }: getLoginInterface) => {
     setLoading(true);
     axios
         .get('https://api-football-v1.p.rapidapi.com/countries', {
@@ -16,8 +16,18 @@ export const fetchLogin = ({ apiKey, setLoading, navigate }: getLoginInterface) 
             if (response.data) {
                 const token = AES.encrypt(apiKey, 'SecretApiKey').toString();
                 localStorage.setItem('token', token);
-                toast.success('Bem vindo ao meu time!');
-                navigate('/selecao-time');
+                setToken(token);
+                return new Promise(resolve => {
+                    const interval = setInterval(() => {
+                        const item = localStorage.getItem('token');
+                        if (item && token) {
+                            clearInterval(interval);
+                            resolve(item);
+                            toast.success('Bem vindo ao meu time!');
+                            navigate('/selecao-time');
+                        }
+                    }, 100);
+                });
             }
         })
         .catch(() => {

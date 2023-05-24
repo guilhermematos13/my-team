@@ -5,4 +5,5 @@ interface getLoginInterface {
     apiKey: string;
     setLoading: Dispatch<SetStateAction>;
     navigate: NavigateFunction;
+    setToken: React.Dispatch<SetStateAction<string | undefined>>;
 }

@@ -5,6 +5,7 @@ export const MyTeamContext = createContext({} as MyTeamContextType);
 
 export function MyTeamContextProvider({ children }: MyTeamProviderProps) {
     const [info, setInfo] = useState<InfoData>();
+    const [token, setToken] = useState<string>();
 
-    return <MyTeamContext.Provider value={{ setInfo, info }}>{children}</MyTeamContext.Provider>;
+    return <MyTeamContext.Provider value={{ setInfo, info, token, setToken }}>{children}</MyTeamContext.Provider>;
 }
