@@ -3,6 +3,7 @@ import { Modal } from '../../../components/Modal';
 import { Header, PlayerInfo } from './styles';
 import { MyTeamContext } from '../../../context/MyTeamContext';
 import { fetchPlayers } from '../../../services';
+import { EmptyMessage } from '../../../components/Empty';
 
 export function PlayersModal() {
     const [playersList, setPlayersList] = useState<PlayersData[]>([]);
@@ -24,15 +25,19 @@ export function PlayersModal() {
                 <strong>País</strong>
             </Header>
             <div className="max-h-[50vh] overflow-y-auto">
-                {playersList.map((playerInfo: PlayersData) => {
-                    return (
-                        <PlayerInfo key={playerInfo.player.id}>
-                            <p>{playerInfo.player.name}</p>
-                            <p>{playerInfo.player.age} anos</p>
-                            <p>{playerInfo.player.nationality}</p>
-                        </PlayerInfo>
-                    );
-                })}
+                {playersList.length ? (
+                    playersList.map((playerInfo: PlayersData) => {
+                        return (
+                            <PlayerInfo key={playerInfo.player.id}>
+                                <p>{playerInfo.player.name}</p>
+                                <p>{playerInfo.player.age} anos</p>
+                                <p>{playerInfo.player.nationality}</p>
+                            </PlayerInfo>
+                        );
+                    })
+                ) : (
+                    <EmptyMessage />
+                )}
             </div>
         </Modal>
     );

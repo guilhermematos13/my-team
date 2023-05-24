@@ -1,3 +1,4 @@
+import { EmptyMessage } from '../../../components/Empty';
 import { Modal } from '../../../components/Modal';
 import { Content, Header } from './styles';
 
@@ -9,7 +10,7 @@ export function LineUpsModal({ lineUpList }: { lineUpList: LineUpsData[] }) {
                 <strong>Vezes utilizadas</strong>
             </Header>
             <div className="max-h-[50vh] overflow-y-auto">
-                {lineUpList &&
+                {lineUpList.length ? (
                     lineUpList.map((data: LineUpsData) => {
                         return (
                             <Content key={data.formation}>
@@ -17,7 +18,10 @@ export function LineUpsModal({ lineUpList }: { lineUpList: LineUpsData[] }) {
                                 <p>{data.played} vez(es)</p>
                             </Content>
                         );
-                    })}
+                    })
+                ) : (
+                    <EmptyMessage />
+                )}
             </div>
         </Modal>
     );
