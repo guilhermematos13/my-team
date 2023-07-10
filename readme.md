@@ -80,7 +80,7 @@ Run ESLint / Rodar o ESLint
 
 -   Para conseguir uma key para ter acesso à aplicação é necessário fazer o cadastro no site da API-Football/Rapidapi (https://dashboard.api-football.com/login / https://rapidapi.com/auth/login)
 
--   Caso queira utilizar a minha key ela é essa 001e6aecafmsh7ed999dcc40c8e4p17ad3cjsnb5e0b7862474, porém, ela tem limite de requisição diária.
+-   Caso queira utilizar a minha key ela é essa 1766df3538msh6f6ef95827ded07p14dd49jsn9179132e6e5e, porém, ela tem limite de requisição diária.
 
 ## Figma
 
