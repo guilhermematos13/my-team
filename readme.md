@@ -1,8 +1,6 @@
 # Meu Time / My Team
 
-Esse projeto foi feito com um teste para um processo seletivo da empresa Trader Tecnology
-
-This project was made with a test for a selection process of the company Trader Tecnology
+Esse projeto foi feito para aprimorar meus conhecimentos.
 
 ## ⚙️ Installation / Instalação
 
